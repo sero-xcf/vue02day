@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+      <h3>{{msg}}</h3>
+      <!-- v-model只能运用在表单元素中 -->
+      <input type="text" style="width:100%" v-model="msg">
+        
+    </div>
+    <script>
+
+      let vm = new Vue({
+        el:"#app",
+        data:{
+            msg:"湖北省武汉市黄陂区前川街hahhhhhh"
+        }
+      })
+    </script>
+</body>
+</html>

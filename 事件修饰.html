@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .inner{
+         height: 150px;
+         background-color: orange;
+     }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 冒泡事件使用stop处理 -->
+        <!-- <div class="inner" @click="divmaopao">
+            <input type="button" value="按钮" @click.stop="maopao">
+
+       </div> -->
+        <!-- prevent阻止默认行为 -->
+        <!-- <a href="http://www.baidu.com" @click.prevent="show">有问题找百度</a> -->
+
+        <!-- capture实现捕获触发事件 从外往里-->
+        <!-- <div class="inner" @click.capture="divmaopao">
+            <input type="button" value="按钮" @click="maopao">
+
+
+        </div> -->
+       <!-- self只会只有当前元素点击时，才出发点击事件 -->
+        <!-- <div class="inner" @click.self="divmaopao">
+                <input type="button" value="按钮" @click="maopao">
+    
+        </div> -->
+        <!-- once只会触发一次事件处理函数 -->
+          <a href="http://www.baidu.com" @click.prevent.once="show">有问题找百度</a> 
+
+           <!-- .self 只会阻止自己身上冒泡行为的触发，并不会真正阻止 冒泡的行为 -->
+ 
+    </div>
+        <script>
+            let vm = new Vue({
+                el: "#app",
+                data: {
+
+                },
+                methods: {
+                    // maopao() {
+                    //     console.log("haha")
+                    // },
+                    // divmaopao() {
+                    //     console.log("hehe")
+                    // },
+                    show() {
+                        alert(123)
+                    }
+                }
+            })
+        </script>
+</body>
+
+</html>

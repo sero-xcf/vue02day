@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap.css">
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline" class="form-control">
+                <label>
+                    id:
+                    <input type="text" v-model="id">
+                </label>
+                <label>
+                    name:
+                    <input type="text" class="form-control" v-model="name">
+                </label>
+                <label>
+
+                    <input type="button" value="添加" class="btn btn-primary" @click="add">
+                </label>
+                <label>
+                    搜索名称关键字：
+                    <input type="text" class="form-control" v-model="keyword">
+                </label>
+            </div>
+        </div>
+
+
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in search(keyword)" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                list: [{
+                        id: 1,
+                        name: "奔驰",
+                        ctime: new Date()
+                    },
+                    {
+                        id: 2,
+                        name: "宝马",
+                        ctime: new Date()
+                    }
+
+                ],
+                id: '',
+                name: '',
+                keyword: ''
+
+            },
+            methods: {
+                add() {
+                    let car = {
+                        id: this.id,
+                        name: this.name,
+                        ctime: new Date()
+                    }
+                    this.list.push(car)
+                    this.id = ''
+                    this.name = ''
+                },
+                del(id) {
+                    // this.list.some((item,index)=>{
+                    //     if(item.id==id){
+                    //         this.list.splice(index,1)
+                    //         return true
+                    //     }
+                    // })
+                    let index = this.list.findIndex(item => {
+                        if (item.id == id) {
+                            //return true 表示会中止后续循环 some findIndex等方法都是这样的
+                            return true
+                        }
+                    })
+                    this.list.splice(index, 1)
+
+                },
+                search(keyword) {
+                    // var newList = []
+                    // this.list.forEach(item => {
+
+                    //     if (item.name.indexOf(keyword) != -1) {
+                    //         newList.push(item)
+
+
+                    //     }
+                    // })
+                    // return newList
+                    return  this.list.filter(item=>{
+                        if(item.name.includes(keyword)){
+                            return item
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+
+
+
+
+
+</body>
+
+</html>
